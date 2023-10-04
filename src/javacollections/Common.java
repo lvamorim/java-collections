@@ -23,33 +23,6 @@ public class Common {
     divider();
   }
 
-  private static String commonOperationKeyword(int operationCode) {
-    String operationKeyword = "";
-
-    switch (operationCode) {
-      case 1:
-        operationKeyword = "Add";
-        break;
-      
-      case 2:
-        operationKeyword = "Remove";
-        break;
-      
-      case 3:
-        operationKeyword = "Update";
-        break;
-      
-      case 4:
-        operationKeyword = "Show";
-        break;
-    
-      default:
-        break;
-    }
-
-    return operationKeyword;
-  }
-
   public static void printCustomOperationName(String name) {
     operationName(name);
   }
@@ -80,7 +53,30 @@ public class Common {
    *  E.g.: "book", "task".
    */
   public static void printCommonOperationName(int operationCode, String data) {
-    String commonOperationName = commonOperationKeyword(operationCode) + " " + data;
+    String operationKeyword = "";
+
+    switch (operationCode) {
+      case 1:
+        operationKeyword = "Add";
+        break;
+      
+      case 2:
+        operationKeyword = "Remove";
+        break;
+      
+      case 3:
+        operationKeyword = "Update";
+        break;
+      
+      case 4:
+        operationKeyword = "Show";
+        break;
+    
+      default:
+        break;
+    }
+
+    String commonOperationName = operationKeyword + " " + data;
 
     if (operationCode == 4) {
       commonOperationName = commonOperationName + "s";
@@ -92,27 +88,8 @@ public class Common {
   /**
    * 
    * @param <T>
-   *  The data's type, which is based on the class model.
+   *  The data's type, which is based on the model class.
    *  E.g.: User.
-   * @param operationCode
-   *  <table>
-   *    <tr>
-   *      <td><strong>1:</strong></td>
-   *      <td>Represents the string "Add".</td>
-   *    </tr>
-   *    <tr>
-   *      <td><strong>2:</strong></td>
-   *      <td>Represents the string "Remove".</td>
-   *    </tr>
-   *    <tr>
-   *      <td><strong>3:</strong></td>
-   *      <td>Represents the string "Update".</td>
-   *    </tr>
-   *    <tr>
-   *      <td><strong>4:</strong></td>
-   *      <td>Represents the string "Show".</td>
-   *    </tr>
-   *  </table>
    * @param data
    *  Represents the variable of the data's type, that contains a string version of the data.
    *  E.g.: user, containing "Name: Susan | Age: 26".
@@ -120,6 +97,10 @@ public class Common {
   public static <T> void printSuccessfulMessage(T data) {
     System.out.println("[Success] ".toUpperCase() + data);
     return;
+  }
+
+  public static void printCustomErrorMessage(String message) {
+    System.err.println(message);
   }
 
   /**
@@ -139,7 +120,7 @@ public class Common {
    *      <td>Represents the string "Zero is not accepted. Please, insert another number."</td>
    *    </tr>
    *    <tr>
-   *      <td><strong>default:</strong></td>
+   *      <td><strong>0 (default):</strong></td>
    *      <td>Represents the string "There is nothing to show."</td>
    *    </tr>
    *  </table>
@@ -169,10 +150,6 @@ public class Common {
       message = "[Error] ".toUpperCase() + message;
     }
 
-    System.err.println(message);
-  }
-
-  public static void printCustomErrorMessage(String message) {
     System.err.println(message);
   }
 }

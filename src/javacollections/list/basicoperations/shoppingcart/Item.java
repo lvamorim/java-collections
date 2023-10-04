@@ -1,5 +1,7 @@
 package javacollections.list.basicoperations.shoppingcart;
 
+import java.util.Locale;
+
 public class Item {
   private String name;
   private double price;
@@ -25,6 +27,8 @@ public class Item {
 
   @Override
   public String toString() {
-    return "Name: " + name + " | Price: " + price + " | Quantity: " + quantity;
+    Locale.setDefault(Locale.US);
+    
+    return "Name: " + name + " | Price: " + String.format("$%.2f", price) + " | Quantity: " + quantity;
   }
 }

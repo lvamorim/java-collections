@@ -104,6 +104,6 @@ public class ShoppingCart {
     }
 
     Locale.setDefault(Locale.US);
-    System.out.printf("$%.2f%n", totalPrice);
+    System.out.printf("$%.2f", totalPrice);
   }
 }
