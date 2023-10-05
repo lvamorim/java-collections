@@ -57,7 +57,7 @@ public class Dictionary {
       boolean foundToRemove = false;
       
       for (Map.Entry<String, String> entry : dictionary.entrySet()) {
-        if (entry.getKey() == word) {
+        if (entry.getKey().equalsIgnoreCase(word)) {
           dictionary.remove(word);
           foundToRemove = true;
           Common.printSuccessfulMessage(toString(entry));

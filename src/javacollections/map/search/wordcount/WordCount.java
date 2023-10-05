@@ -8,7 +8,7 @@ import javacollections.Common;
 public class WordCount {
   private Map<String, Integer> wordCount;
   
-  private String toString(Map.Entry entry) {
+  private String toString(Map.Entry<String, Integer> entry) {
     return "Word: " + entry.getKey() + " | Count: " + entry.getValue();
   }
 
@@ -48,7 +48,7 @@ public class WordCount {
       Map.Entry<String, Integer> entryToRemove = null;
       
       for (Map.Entry<String, Integer> entry : wordCount.entrySet()) {
-        if (entry.getKey() == word) {
+        if (entry.getKey().equalsIgnoreCase(word)) {
           wordCount.remove(word);
           entryToRemove = entry;
           Common.printSuccessfulMessage(toString(entry));

@@ -1,6 +1,8 @@
 package javacollections.map.search.inventoryofproducts;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javacollections.Common;
@@ -9,7 +11,7 @@ public class InventoryOfProducts {
   private Map<Long, Product> inventoryOfProducts;
   
   private String toString(Map.Entry<Long, Product> entry) {
-    return "Code: " + entry.getKey() + " | Product: " + entry.getValue();
+    return "Code: " + entry.getKey() + " | " + entry.getValue();
   }
 
   private String data = "product";
@@ -79,24 +81,21 @@ public class InventoryOfProducts {
     }
   }
 
-  private void getMostExpensiveOrCheapestProduct(Boolean option) {
-    Common.printCustomOperationName((option ? "Most expensive" : "Cheapest") + " " + data);
+  private void getMostExpensiveOrCheapestProducts(Boolean option) {
+    Common.printCustomOperationName((option ? "Most expensive" : "Cheapest") + " " + data + "(s)");
 
     try {
       if (inventoryOfProducts.isEmpty()) {
         throw new Exception();
       }
 
-      Product foundProduct = null;
       double mostExpensive = Double.MIN_VALUE;
       double cheapest = Double.MAX_VALUE;
 
       for (Product product : inventoryOfProducts.values()) {
-        double price = product. getPrice();
+        double price = product.getPrice();
 
         if (option ? price > mostExpensive : price < cheapest) {
-          foundProduct = product;
-
           if (option) {
             mostExpensive = price;
           }
@@ -106,9 +105,8 @@ public class InventoryOfProducts {
       }
 
       for (Map.Entry<Long, Product> entry : inventoryOfProducts.entrySet()) {
-        if (entry.getValue() == foundProduct) {
-          System.out.println("Code: " + entry.getKey() + " | " + foundProduct);
-          break;
+        if (entry.getValue().getPrice() == (option ? mostExpensive : cheapest)) {
+          System.out.println(toString(entry));
         }
       }
     }
@@ -119,34 +117,41 @@ public class InventoryOfProducts {
   }
 
   public void getMostExpensiveProduct() {
-    getMostExpensiveOrCheapestProduct(true);
+    getMostExpensiveOrCheapestProducts(true);
   }
 
   public void getCheapestProduct() {
-    getMostExpensiveOrCheapestProduct(false);
+    getMostExpensiveOrCheapestProducts(false);
   }
 
   public void getProductWithBiggestQuantityByPrice() {
-    Common.printCustomOperationName(data + " with biggest quantity by price");
+    Common.printCustomOperationName(data + "(s) with biggest quantity by price");
 
     try {
       if (inventoryOfProducts.isEmpty()) {
         throw new Exception();
       }
 
-      Product foundProduct = null;
-      double biggestQuantity = 0;
+      List<Map.Entry<Long, Product>> productsWithBiggestPrice = new ArrayList<>();
+      double biggestPrice = 0;
 
       for (Map.Entry<Long, Product> entry : inventoryOfProducts.entrySet()) {
         double price = entry.getValue().getPrice() * entry.getValue().getQuantity();
 
-        if (price > biggestQuantity) {
-          biggestQuantity = price;
-          foundProduct = entry.getValue();
+        if (price > biggestPrice) {
+          biggestPrice = price;
+          productsWithBiggestPrice.clear();
+          productsWithBiggestPrice.add(entry);
+        }
+        
+        else if (price == biggestPrice) {
+          productsWithBiggestPrice.add(entry);
         }
       }
 
-      System.out.println(foundProduct);
+      for (Map.Entry<Long, Product> entry : productsWithBiggestPrice) {
+        System.out.println(toString(entry));
+      }
     }
     
     catch (Exception e) {

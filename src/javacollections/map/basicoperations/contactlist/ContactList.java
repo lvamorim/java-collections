@@ -57,7 +57,7 @@ public class ContactList {
       boolean foundToRemove = false;
 
       for (Map.Entry<String, Integer> entry : contactList.entrySet()) {
-        if (entry.getKey() == name) {
+        if (entry.getKey().equalsIgnoreCase(name)) {
           contactList.remove(name);
           foundToRemove = true;
           Common.printSuccessfulMessage(toString(entry));

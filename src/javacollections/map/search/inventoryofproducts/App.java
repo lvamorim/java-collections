@@ -7,7 +7,8 @@ public class App {
     inventoryOfProducts.addProduct(002, "Smartphone", 999.00, 30);
     inventoryOfProducts.addProduct(003, "Athletic Shoes", 129.99, 50);
     inventoryOfProducts.addProduct(004, "Smart TV", 699.99, 10);
-    inventoryOfProducts.addProduct(005, "Wristwatch", 149.95, 15);
+    inventoryOfProducts.addProduct(005, "Bluetooth Earbuds", 129.99, 25);
+    inventoryOfProducts.addProduct(006, "Laptop", 999.00, 30);
     inventoryOfProducts.showProducts();
     inventoryOfProducts.calcTotalInventoryPrice();
     inventoryOfProducts.getMostExpensiveProduct();
